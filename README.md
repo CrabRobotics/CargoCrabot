@@ -6,4 +6,3 @@ Kate Test
 Caleb Durda
 Adam Mulac
 Carlton Schantz
-test
