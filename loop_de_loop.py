@@ -8,7 +8,6 @@ from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
 import cargo_library
 
-
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
 # Click "Open user guide" on the EV3 extension tab for more information.
 
@@ -16,7 +15,12 @@ import cargo_library
 # Create your objects here.
 ev3 = EV3Brick()
 
-def test():
+def loop():
     ev3.speaker.beep()
     wait(100)
     cargo_library.beep()
+    wait(100)
+    cargo_library.beep()
+    wait(100)
+    cargo_library.beep()
+    

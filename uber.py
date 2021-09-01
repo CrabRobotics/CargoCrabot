@@ -8,6 +8,8 @@ from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
 import cargo_library
 import run_test
+import loop_de_loop
+import wavy_arms
 
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
 # Click "Open user guide" on the EV3 extension tab for more information.
@@ -25,10 +27,10 @@ while True:
         run_test.test()
         print("center")  
     if Button.UP in b:
-        run_test.test()
+        loop_de_loop.loop()
         print("up") 
     if Button.DOWN in b:
-        run_test.test() 
+        wavy_arms.wavy() 
         print("down")
     if Button.RIGHT in b:
         run_test.test()
