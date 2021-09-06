@@ -16,7 +16,10 @@ import cargo_library
 # Create your objects here.
 ev3 = EV3Brick()
 
+left_motor = Motor(Port.A)
+right_motor = Motor(Port.D)
+left_sensor = ColorSensor(Port.S1)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=122)
+
 def test():
-    ev3.speaker.beep()
-    wait(100)
-    cargo_library.beep()
+    cargo_library.line_follower(100, 600)
