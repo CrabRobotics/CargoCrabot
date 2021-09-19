@@ -14,28 +14,52 @@ import cargo_library
 
 # Create your objects here.
 ev3 = EV3Brick()
-left_motor = Motor(Port.A)
-right_motor = Motor(Port.D)
-left_sensor = ColorSensor(Port.S1)
-robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=122)
+# left_motor = Motor(Port.A)
+# right_motor = Motor(Port.D)
+# #left_sensor = ColorSensor(Port.S1)
+# robot = DriveBase(left_motor, right_motor, wheel_diameter=86.3, axle_track=111)
+
 
 def beep():
     ev3.speaker.beep()
 
-def line_follower(Speed, Distance):
-    BLACK = 6
-    WHITE = 94
-    threshold = (BLACK + WHITE) / 2
-    DRIVE_SPEED = Speed #mm per second
-    PROPORTIONAL_GAIN = 0.7
-    #linetime = StopWatch()
+# def line_follower(Speed, Distance):
+#     BLACK = 6
+#     WHITE = 94
+#     threshold = (BLACK + WHITE) / 2
+#     DRIVE_SPEED = Speed #mm per second
+#     PROPORTIONAL_GAIN = 0.7
+#     #linetime = StopWatch()
 
-    robot.reset()
-    distance = robot.distance()
-    while distance < Distance:
-        deviation = left_sensor.reflection() - threshold
-        turn_rate = PROPORTIONAL_GAIN * deviation
-        robot.drive(DRIVE_SPEED, turn_rate)
-        wait(1)
-        distance = robot.distance()
-    robot.stop()
+#     robot.reset()
+#     distance = robot.distance()
+#     while distance < Distance:
+#         deviation = left_sensor.reflection() - threshold
+#         turn_rate = PROPORTIONAL_GAIN * deviation
+#         robot.drive(DRIVE_SPEED, turn_rate)
+#         wait(1)
+#         distance = robot.distance()
+#     robot.stop()
+
+def test():
+    def gyro_drive(speed, distance, angle):
+        gyro.reset_angle(0)
+        robot.reset()
+        drive_distance = robot.distance()
+        kp = 5
+        ka = .1
+        while drive_distance < distance:
+            deviation = gyro.angle() - angle
+            turn_rate = kp * deviation
+            acc_speed = speed * ka
+            robot.drive(acc_speed, turn_rate)
+            wait(200)
+            drive_distance = robot.distance()
+            if ka < 1:
+                ka = ka + .1
+            print(gyro.angle())
+        #robot.stop()
+        robot.straight(0)
+        wait(1000)
+        print(gyro.angle())
+    gyro_drive(600, 1000, 0)
