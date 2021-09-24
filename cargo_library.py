@@ -14,11 +14,11 @@ import cargo_library
 
 # Create your objects here.
 ev3 = EV3Brick()
-# left_motor = Motor(Port.A)
-# right_motor = Motor(Port.D)
+left_motor = Motor(Port.A)
+right_motor = Motor(Port.D)
 # #left_sensor = ColorSensor(Port.S1)
-# robot = DriveBase(left_motor, right_motor, wheel_diameter=86.3, axle_track=111)
-
+robot = DriveBase(left_motor, right_motor, wheel_diameter=86.3, axle_track=111)
+gyro = GyroSensor(Port.S2)
 
 def beep():
     ev3.speaker.beep()
@@ -41,25 +41,26 @@ def beep():
 #         distance = robot.distance()
 #     robot.stop()
 
-def test():
-    def gyro_drive(speed, distance, angle):
-        gyro.reset_angle(0)
-        robot.reset()
+
+def gyro_drive(speed, distance, angle):
+    gyro.reset_angle(0)
+    robot.reset()
+    drive_distance = robot.distance()
+    kp = 5
+    ka = .1
+    while drive_distance < distance:
+        deviation = gyro.angle() - angle
+        turn_rate = kp * deviation
+        acc_speed = speed * ka
+        robot.drive(acc_speed, turn_rate)
+        wait(200)
         drive_distance = robot.distance()
-        kp = 5
-        ka = .1
-        while drive_distance < distance:
-            deviation = gyro.angle() - angle
-            turn_rate = kp * deviation
-            acc_speed = speed * ka
-            robot.drive(acc_speed, turn_rate)
-            wait(200)
-            drive_distance = robot.distance()
-            if ka < 1:
-                ka = ka + .1
-            print(gyro.angle())
-        #robot.stop()
-        robot.straight(0)
-        wait(1000)
+        if ka < 1:
+            ka = ka + .1
         print(gyro.angle())
-    gyro_drive(600, 1000, 0)
+    #robot.stop()
+    robot.straight(0)
+    wait(100)
+    robot.stop()
+    print(gyro.angle())
+    print(robot.distance_control.limits())
