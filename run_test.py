@@ -19,7 +19,7 @@ ev3 = EV3Brick()
 left_motor = Motor(Port.A)
 right_motor = Motor(Port.D)
 #left_sensor = ColorSensor(Port.S1)
-robot = DriveBase(left_motor, right_motor, wheel_diameter=86.3, axle_track=115)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=86.3, axle_track=89)
 gyro = GyroSensor(Port.S2)
 
 def test():
@@ -52,4 +52,4 @@ def test():
         robot.straight(0)
         wait(1000)
         print(gyro.angle())
-    gyro_drive(600, 1000, 0)
+    cargo_library.gyro_drive(1000, 2000, 0)
