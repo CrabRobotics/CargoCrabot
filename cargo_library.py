@@ -18,8 +18,8 @@ ev3 = EV3Brick()
 left_motor = Motor(Port.A)
 right_motor = Motor(Port.D)
 # #left_sensor = ColorSensor(Port.S1)
-robot = DriveBase(left_motor, right_motor, wheel_diameter=86.3, axle_track=111)
-gyro = GyroSensor(Port.S2)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=111)
+gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 
 def beep():
     ev3.speaker.beep()
@@ -59,7 +59,7 @@ def gyro_drive(speed, distance, angle):
             print(kd)
         else:
             print("No Change")
-        deviation = gyro.angle() - angle
+        deviation = angle - gyro.angle()
         turn_rate = kp * deviation
         robot.drive(new_speed, turn_rate)
         drive_distance = robot.distance()

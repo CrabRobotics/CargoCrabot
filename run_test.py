@@ -19,37 +19,28 @@ ev3 = EV3Brick()
 left_motor = Motor(Port.A)
 right_motor = Motor(Port.D)
 #left_sensor = ColorSensor(Port.S1)
-robot = DriveBase(left_motor, right_motor, wheel_diameter=86.3, axle_track=89)
-gyro = GyroSensor(Port.S2)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=111)
+gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 
 def test():
-    def gyro_drive(speed, distance, angle):
-        gyro.reset_angle(0)
-        robot.reset()
-        drive_distance = robot.distance()
-        kp = 5
-        ka = .1
-        kd = .1
-        while drive_distance < distance:
-            deviation = gyro.angle() - angle
-            turn_rate = kp * deviation
-            dec_speed = 0
-            acc_speed = speed * ka
-            dec_start_time = distance * .75
-            if distance >= dec_start_time:
-                robot.drive(dec_speed, turn_rate)
-            else:
-                robot.drive(acc_speed, turn_rate)
-            wait(200)
-            drive_distance = robot.distance()
-            if ka < 1:
-                ka = ka + .1
-            if distance >= dec_start_time:
-                kd = kd + .1
-                dec_speed = acc_speed - (speed * kd)
-            print(gyro.angle())
-        #robot.stop()
-        robot.straight(0)
-        wait(1000)
-        print(gyro.angle())
-    cargo_library.gyro_drive(1000, 2000, 0)
+    # robot.reset
+    # robot.settings(300,735,189,759)
+    cargo_library.gyro_drive(300, 100, 0)
+    print(robot.angle())
+    robot.turn(45)
+    print(robot.angle())
+    cargo_library.gyro_drive(300, 700, 0)
+    print(robot.angle())
+    robot.turn(31)
+    print(robot.angle())
+    cargo_library.gyro_drive(300, 300, 0)
+    print(robot.angle())
+    robot.turn(-30)
+    print(robot.angle())
+    cargo_library.gyro_drive(300, 280, 0)
+    print(robot.angle())
+    robot.turn(30)
+    print(robot.angle())
+    cargo_library.gyro_drive(300, 350, 0)
+
+    print(robot.settings())
