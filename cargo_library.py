@@ -20,6 +20,8 @@ right_motor = Motor(Port.D)
 # #left_sensor = ColorSensor(Port.S1)
 robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=111)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
+#robot.distance_control.limits(400, 300, 100)
+#robot.heading_control.limits(300,100,100)
 
 def beep():
     ev3.speaker.beep()
@@ -44,8 +46,6 @@ def beep():
 
 
 def gyro_drive(speed, distance, angle):
-    robot.distance_control.limits(speed, 300, 100)
-    gyro.reset_angle(0)
     robot.reset()
     drive_distance = robot.distance()
     kp = 5
@@ -55,18 +55,17 @@ def gyro_drive(speed, distance, angle):
         if drive_distance >= distance * .75 and kd >= .4:
             kd = kd - .2
             new_speed = speed * kd
-            print("kd")
-            print(kd)
-        else:
-            print("No Change")
+            #print("kd =", kd)
+        # else:
+        #     print("No Change to Speed")
         deviation = angle - gyro.angle()
         turn_rate = kp * deviation
         robot.drive(new_speed, turn_rate)
         drive_distance = robot.distance()
         wait(100)
-        print(gyro.angle())
-        print(new_speed)
-    #robot.stop()
+        #print("Gyro_Drive Angle =", gyro.angle())
+        #print("Speed =", new_speed)
     robot.straight(0)
-    print(gyro.angle())
-    print(robot.distance_control.limits())
+    print("Angle =", gyro.angle(), "Should be", angle)
+    # print("Distance Settings =", robot.distance_control.limits())
+    # print("Heading Settings =", robot.heading_control.limits())
