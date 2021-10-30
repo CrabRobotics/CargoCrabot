@@ -17,7 +17,8 @@ import cargo_library
 ev3 = EV3Brick()
 left_motor = Motor(Port.A)
 right_motor = Motor(Port.D)
-# #left_sensor = ColorSensor(Port.S1)
+left_sensor = ColorSensor(Port.S1)
+right_sensor = ColorSensor(Port.S4)
 robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=111)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 #robot.distance_control.limits(400, 300, 100)
@@ -26,23 +27,12 @@ gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 def beep():
     ev3.speaker.beep()
 
-# def line_follower(Speed, Distance):
-#     BLACK = 6
-#     WHITE = 94
-#     threshold = (BLACK + WHITE) / 2
-#     DRIVE_SPEED = Speed #mm per second
-#     PROPORTIONAL_GAIN = 0.7
-#     #linetime = StopWatch()
+def reset(angle):
+    robot.reset()
+    gyro.reset_angle(angle)
 
-#     robot.reset()
-#     distance = robot.distance()
-#     while distance < Distance:
-#         deviation = left_sensor.reflection() - threshold
-#         turn_rate = PROPORTIONAL_GAIN * deviation
-#         robot.drive(DRIVE_SPEED, turn_rate)
-#         wait(1)
-#         distance = robot.distance()
-#     robot.stop()
+def turn(angle):
+    robot.turn(angle)
 
 
 def gyro_drive(speed, distance, angle):
@@ -52,9 +42,9 @@ def gyro_drive(speed, distance, angle):
     kd = 1
     new_speed = speed
     while drive_distance < distance:
-        if drive_distance >= distance * .75 and kd >= .4:
-            kd = kd - .2
-            new_speed = speed * kd
+        # if drive_distance >= distance * .75 and kd >= .4:
+        #     kd = kd - .2
+        #     new_speed = speed * kd
             #print("kd =", kd)
         # else:
         #     print("No Change to Speed")
@@ -65,7 +55,33 @@ def gyro_drive(speed, distance, angle):
         wait(100)
         #print("Gyro_Drive Angle =", gyro.angle())
         #print("Speed =", new_speed)
-    robot.straight(0)
     print("Angle =", gyro.angle(), "Should be", angle)
-    # print("Distance Settings =", robot.distance_control.limits())
-    # print("Heading Settings =", robot.heading_control.limits())
+    robot.straight(0)
+    wait(200)
+    print("Distance Settings =", robot.distance_control.limits())
+    print("Heading Settings =", robot.heading_control.limits())
+
+def gyro_drive_until_l(speed, angle):
+    # Won't work if sensor is on black
+    verify = 0
+    kp = 5
+    while left_sensor.color() != Color.BLACK and verify < 2:
+        if left_sensor.color() == Color.BLACK:
+            verify = verify + 1
+        deviation = angle - gyro.angle()
+        turn_rate = kp * deviation
+        robot.drive(speed, turn_rate)
+        print ("Left color sensor = ",left_sensor.color())
+    robot.straight(0)
+    wait(200)
+
+def gyro_drive_until_r(speed, angle):
+    # Won't work if sensor is on black
+    kp = 5
+    while right_sensor.color() != Color.BLACK:
+        deviation = angle - gyro.angle()
+        turn_rate = kp * deviation
+        robot.drive(speed, turn_rate)
+        print ("Right color sensor = ",right_sensor.color())
+    robot.straight(0)
+    wait(200)

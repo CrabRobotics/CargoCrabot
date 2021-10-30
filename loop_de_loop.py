@@ -14,6 +14,14 @@ import cargo_library
 
 # Create your objects here.
 ev3 = EV3Brick()
+left_motor = Motor(Port.A)
+right_motor = Motor(Port.D)
+left_sensor = ColorSensor(Port.S1)
+right_sensor = ColorSensor(Port.S4)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=111)
+gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
+robot.distance_control.limits(400, 200, 100)
+robot.heading_control.limits(100, 200, 100)
 
 def loop():
     ev3.speaker.beep()
