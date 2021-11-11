@@ -19,7 +19,7 @@ left_motor = Motor(Port.A)
 right_motor = Motor(Port.D)
 left_sensor = ColorSensor(Port.S1)
 right_sensor = ColorSensor(Port.S4)
-robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=111)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=116)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 timer = StopWatch()
 
@@ -63,9 +63,10 @@ def gyro_drive_until_l(speed, angle):
         deviation = angle - gyro.angle()
         turn_rate = kp * deviation
         robot.drive(speed, turn_rate)
-        print ("Left color sensor = ",left_sensor.color())
+        #print ("Left color sensor = ",left_sensor.color())
     robot.straight(0)
     wait(200)
+    print("Angle =", gyro.angle(), "Should be", angle)
 
 def gyro_drive_until_r(speed, angle):
     # Won't work if sensor is on black
@@ -74,9 +75,10 @@ def gyro_drive_until_r(speed, angle):
         deviation = angle - gyro.angle()
         turn_rate = kp * deviation
         robot.drive(speed, turn_rate)
-        print ("Right color sensor = ",right_sensor.color())
+        #print ("Right color sensor = ",right_sensor.color())
     robot.straight(0)
     wait(200)
+    print("Angle =", gyro.angle(), "Should be", angle)
 
 def reset_on_wall():
     timer.reset()

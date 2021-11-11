@@ -19,13 +19,11 @@ ev3 = EV3Brick()
 left_motor = Motor(Port.A)
 right_motor = Motor(Port.D)
 #left_sensor = ColorSensor(Port.S1)
-robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=111)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=116)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 left_sensor = ColorSensor(Port.S1)
 right_sensor = ColorSensor(Port.S4)
 timer = StopWatch()
 
 def test():
-    cargo_library.reset
-    cargo_library.bw_gyro_drive_until_t(200,1000,0)
-    cargo_library.gyro_drive(200,200,0)
+    pass
