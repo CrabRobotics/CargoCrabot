@@ -26,4 +26,11 @@ right_sensor = ColorSensor(Port.S4)
 timer = StopWatch()
 
 def test():
-    pass
+    v = ev3.battery.voltage()
+    if v < 8000:
+        ev3.speaker.beep(1000, 1000)
+    angle = gyro.angle()
+    wait(5000)
+    new_angle = gyro.angle()
+    if new_angle > angle:
+        ev3.speaker.beep(1000, 1000)
