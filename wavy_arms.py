@@ -20,7 +20,7 @@ left_sensor = ColorSensor(Port.S1)
 right_sensor = ColorSensor(Port.S4)
 robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=116)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
-robot.distance_control.limits(400, 200, 100)
+robot.distance_control.limits(300, 200, 100)
 robot.heading_control.limits(100, 200, 100)
 timer = StopWatch()
 #Before new axle track the track was "axle_track=111"
@@ -60,7 +60,7 @@ def wavy():
     robot.straight(-100) 
 #backing up to the wall by helicopter
     robot.turn(75)
-    cargo_library.bw_gyro_drive_until_t(450, 2500, 180)
+    cargo_library.bw_gyro_drive_until_t(450, 2700, 180)
     robot.stop()
     cargo_library.reset(180)
     wait(100)
@@ -76,10 +76,9 @@ def wavy():
     robot.turn(35)
     cargo_library.gyro_drive_until_l(200, 180)
 #go back home
-    robot.straight(-300)
-    robot.turn(90)
-    cargo_library.gyro_drive(200, 300, 270)
-    cargo_library.gyro_drive_until_r(200, 270)
+    cargo_library.bw_gyro_drive(600, 180, 175)
+    robot.turn(95)
+    cargo_library.gyro_drive(1000, 1200, 270)
 
     # cargo_library.gyro_drive(200, 135, 180)
     # robot.turn(-90)
