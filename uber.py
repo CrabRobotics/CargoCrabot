@@ -10,6 +10,7 @@ import cargo_library
 import run_test
 import loop_de_loop
 import wavy_arms
+import diagnostics
 
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
 # Click "Open user guide" on the EV3 extension tab for more information.
@@ -21,8 +22,12 @@ ev3 = EV3Brick()
 
 # Write your program here.
 
+diagnostics.diagnostics_test()
+
 while True: 
     b = EV3Brick.buttons.pressed()
+    ev3.screen.print(ev3.battery.voltage())
+    ev3.screen.print(gyro.angle())
     if Button.CENTER in b:
         run_test.test()
         print("center")  
@@ -38,3 +43,6 @@ while True:
     if Button.LEFT in b:
         run_test.test() 
         print("left") 
+    if Button.LEFT and Button.RIGHT in b:
+        diagnostics.diagnostics_test()
+        print(diagnostics)
