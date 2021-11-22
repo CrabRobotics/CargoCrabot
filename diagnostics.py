@@ -18,26 +18,25 @@ ev3 = EV3Brick()
 
 left_motor = Motor(Port.A)
 right_motor = Motor(Port.D)
-left_sensor = ColorSensor(Port.S1)
-right_sensor = ColorSensor(Port.S4)
+#left_sensor = ColorSensor(Port.S1)
 robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=116)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
-robot.distance_control.limits(300, 200, 100)
-robot.heading_control.limits(100, 200, 100)
+left_sensor = ColorSensor(Port.S1)
+right_sensor = ColorSensor(Port.S4)
 timer = StopWatch()
 
 def diagnostics_test():
     cargo_library.reset(0)
-    volt = ev3.battery.voltage()
-    if volt < 8000:
+    v = ev3.battery.voltage()
+    if v < 9000:
         ev3.speaker.beep(1000, 1000)
         ev3.speaker.say("Battery")
         ev3.screen.print("Battery Problem")
-    g_angle = gyro.angle()
+    angle = gyro.angle()
     wait(5000)
-    new_g_angle = gyro.angle()
-    new_g_angle = abs(new_angle)
-    if new_g_angle > 1:
+    new_angle = gyro.angle()
+    new_angle = abs(new_angle)
+    if new_angle > 1:
         ev3.speaker.beep(1000, 1000)
         ev3.speaker.say("gyro")
         ev3.screen.print("Gyro Problem")
