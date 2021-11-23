@@ -18,7 +18,7 @@ import diagnostics
 
 # Create your objects here.
 ev3 = EV3Brick()
-
+gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 
 # Write your program here.
 
@@ -26,8 +26,8 @@ diagnostics.diagnostics_test()
 
 while True: 
     b = EV3Brick.buttons.pressed()
-    ev3.screen.print(ev3.battery.voltage())
-    ev3.screen.print(gyro.angle())
+    # ev3.screen.print(ev3.battery.voltage())
+    # ev3.screen.print(gyro.angle())
     if Button.CENTER in b:
         run_test.test()
         print("center")  
@@ -43,6 +43,6 @@ while True:
     if Button.LEFT in b:
         run_test.test() 
         print("left") 
-    if Button.LEFT and Button.RIGHT in b:
-        diagnostics.diagnostics_test()
-        print(diagnostics)
+    # if Button.LEFT and Button.RIGHT in b:
+    #     diagnostics.diagnostics_test()
+    #     print(diagnostics)

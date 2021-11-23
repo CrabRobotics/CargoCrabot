@@ -26,17 +26,5 @@ right_sensor = ColorSensor(Port.S4)
 timer = StopWatch()
 
 def test():
-    cargo_library.reset(0)
-    v = ev3.battery.voltage()
-    if v < 9000:
-        ev3.speaker.beep(1000, 1000)
-        ev3.speaker.say("Battery")
-        ev3.screen.print("Battery Problem")
-    angle = gyro.angle()
-    wait(5000)
-    new_angle = gyro.angle()
-    new_angle = abs(new_angle)
-    if new_angle > 1:
-        ev3.speaker.beep(1000, 1000)
-        ev3.speaker.say("gyro")
-        ev3.screen.print("Gyro Problem")
+    print("Current: " ,ev3.battery.current())
+    print("Voltage: " ,ev3.battery.voltage())
