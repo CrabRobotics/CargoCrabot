@@ -21,7 +21,6 @@ ev3 = EV3Brick()
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 
 # Write your program here.
-
 diagnostics.diagnostics_test()
 
 while True: 

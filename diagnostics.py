@@ -34,7 +34,7 @@ def diagnostics_test():
         ev3.speaker.say("Battery")
         ev3.screen.print("Battery Problem")
     g_angle = gyro.angle()
-    wait(5000)
+    wait(1000)
     new_g_angle = gyro.angle()
     new_g_angle = abs(new_g_angle)
     if new_g_angle > 1:
