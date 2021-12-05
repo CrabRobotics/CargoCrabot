@@ -21,9 +21,17 @@ ev3 = EV3Brick()
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 
 # Write your program here.
-diagnostics.diagnostics_test()
 
-while True: 
+diagnostics.diagnostics_test()
+battery = ev3.battery.voltage()
+gyro_angle = gyro.angle()
+while True:
+    battery = ev3.battery.voltage()
+    gyro_angle = gyro.angle()
+    ev3.screen.print("Battery: ",battery)
+    ev3.screen.print("Gyro Angle: ",gyro_angle)
+    wait(500)
+    ev3.screen.clear()
     b = EV3Brick.buttons.pressed()
     # ev3.screen.print(ev3.battery.voltage())
     # ev3.screen.print(gyro.angle())
