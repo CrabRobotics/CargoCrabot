@@ -30,6 +30,8 @@ def test():
     # front_attachment_motor.reset_angle(0)
     # front_attachment_motor.run_angle(-500, 142, then=Stop.BRAKE)
     # wait(2000)
-    # front_attachment_motor.run_angle(100, 142, then=Stop.BRAKE)
+    #front_attachment_motor.run_angle(100, 142, then=Stop.BRAKE)
+    cargo_library.reset_on_wall()
     cargo_library.reset(0)
-    cargo_library.gyro_drive_until_l(600, 0, 3)
+    cargo_library.gyro_drive_until_r(600, 0, 2)
+#

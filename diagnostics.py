@@ -31,8 +31,13 @@ def diagnostics_test():
     volt = ev3.battery.voltage()
     if volt < 8000:
         ev3.speaker.beep(1000, 1000)
-        ev3.speaker.say("Battery")
+        ev3.speaker.say("Voltage")
         ev3.screen.print("Battery Problem")
+    # current = ev3.battery.current()
+    # if current < 1.80
+    #     ev3.speaker.beep(1000, 1000)
+    #     ev3.speaker.say("Current")
+    #     ev3.screen.print("Battery Problem")
     g_angle = gyro.angle()
     wait(1000)
     new_g_angle = gyro.angle()
