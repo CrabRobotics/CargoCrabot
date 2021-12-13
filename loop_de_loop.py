@@ -42,10 +42,10 @@ def loop():
     front_attachment_motor.run_angle(-500, 130, then=Stop.BRAKE)
     cargo_library.gyro_drive(200, 120, 56)
     #flip engine
-    front_attachment_motor.run_angle(400, 130, then=Stop.BRAKE)
+    front_attachment_motor.run_angle(200, 130, then=Stop.BRAKE)
     #get to cargo plane
     robot.turn(-11)
-    cargo_library.bw_gyro_drive(600, 190, 45)
+    cargo_library.bw_gyro_drive(600, 180, 45)
     robot.turn(-90)
     #unload cargo plane
     front_attachment_motor.run_angle(-10000, 150, then=Stop.BRAKE)
@@ -64,5 +64,6 @@ def loop():
     robot.turn(-60)
     #return to home
     robot.turn(45)
-    front_attachment_motor.run_angle(500, 150, then=Stop.BRAKE)
+    #front_attachment_motor.run_angle(500, 150, then=Stop.BRAKE)
     cargo_library.bw_gyro_drive(600, 600, 0)
+    front_attachment_motor.run_angle(500, 150, then=Stop.BRAKE)

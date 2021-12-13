@@ -32,7 +32,7 @@ while True:
     ev3.screen.print("Voltage: ",voltage)
     ev3.screen.print("Current: ",current)
     ev3.screen.print("Gyro Angle: ",gyro_angle)
-    wait(200)
+    #wait(200)
     ev3.screen.clear()
     b = EV3Brick.buttons.pressed()
     # ev3.screen.print(ev3.battery.voltage())

@@ -71,18 +71,18 @@ def wavy():
 #pushes train out
     robot.straight(-75)
     robot.turn(90)
-    cargo_library.gyro_drive(200, 70, 145)
-    cargo_library.gyro_drive_until_l(200, 145, 1)
+    #cargo_library.gyro_drive(200, 70, 145)
+    cargo_library.gyro_drive_until_l(100, 145, 2)
     robot.turn(35)
     cargo_library.gyro_drive_until_l(200, 180, 1)
 #go back home
     cargo_library.bw_gyro_drive(600, 180, 175)
     robot.turn(95)
-    cargo_library.gyro_drive(1000, 1070, 270)
+    cargo_library.gyro_drive(1000, 1060, 270)
     robot.turn(-35)
     cargo_library.gyro_drive_until_r(200, 235, 1)
-    robot.turn(35)
-    cargo_library.gyro_drive(1000, 650, 270)
+    robot.turn(45)
+    cargo_library.gyro_drive(1000, 650, 280)
 
     # cargo_library.gyro_drive(200, 135, 180)
     # robot.turn(-90)
