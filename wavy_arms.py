@@ -76,8 +76,8 @@ def wavy():
     robot.turn(35)
     cargo_library.gyro_drive_until_l(200, 180, 1)
 #go back home
-    cargo_library.bw_gyro_drive(600, 180, 175)
-    robot.turn(95)
+    cargo_library.bw_gyro_drive(600, 180, 180)
+    robot.turn(90)
     cargo_library.gyro_drive(1000, 1060, 270)
     robot.turn(-35)
     cargo_library.gyro_drive_until_r(200, 235, 1)

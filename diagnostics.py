@@ -28,14 +28,14 @@ timer = StopWatch()
 
 def diagnostics_test():
     ev3.speaker.say("Starting")
-    ev3.light.on(color.YELLOW)
+    ev3.light.on(Color.YELLOW)
     cargo_library.reset(0)
     volt = ev3.battery.voltage()
     if volt < 8000:
         ev3.speaker.beep(1000, 1000)
         ev3.speaker.say("Voltage")
         ev3.screen.print("Voltage Problem")
-        ev3.light.on(color.RED)
+        ev3.light.on(Color.RED)
     # current = ev3.battery.current()
     # if current < 1.80
     #     ev3.speaker.beep(1000, 1000)
@@ -50,6 +50,6 @@ def diagnostics_test():
         ev3.speaker.beep(1000, 1000)
         ev3.speaker.say("gyro")
         ev3.screen.print("Gyro Problem")
-        ev3.light.on(color.RED)
+        ev3.light.on(Color.RED)
     ev3.speaker.say("Finished")
-    ev3.light.on(color.GREEN)
+    ev3.light.on(Color.GREEN)

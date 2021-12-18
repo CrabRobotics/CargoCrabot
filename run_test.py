@@ -28,5 +28,5 @@ timer = StopWatch()
 
 def test():
     front_attachment_motor.reset_angle(0)
-    front_attachment_motor.run_angle(200, -250, then=Stop.BRAKE)
-    front_attachment_motor.run_angle(500, 250, then=Stop.BRAKE)
+    front_attachment_motor.run_angle(1000, -150, then=Stop.BRAKE)
+    front_attachment_motor.run_angle(500, 150, then=Stop.BRAKE)

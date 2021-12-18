@@ -32,6 +32,8 @@ def loop():
     # cargo_library.beep()
     # wait(100)
     # cargo_library.beep()
+    front_attachment_motor.run_angle(-500, 150, then=Stop.BRAKE)
+    front_attachment_motor.run_angle(500, 150, then=Stop.BRAKE)
     cargo_library.reset_on_wall()
     cargo_library.reset(0)
     #drive to 2 black line
