@@ -27,6 +27,43 @@ right_sensor = ColorSensor(Port.S4)
 timer = StopWatch()
 
 def test():
-    front_attachment_motor.reset_angle(0)
-    front_attachment_motor.run_angle(1000, -150, then=Stop.BRAKE)
+    #backs up into wall
+    cargo_library.reset_on_wall()
+    cargo_library.reset(0)
+    #push front  attachment down
+    front_attachment_motor.run_angle(-500, 150, then=Stop.BRAKE)
+    #drive to black line by airplane
+    cargo_library.gyro_drive(200, 130, 0)
+    robot.turn(45)
+    cargo_library.gyro_drive_until_l(600, 45, 1)
+    robot.turn(25)
+    #Drive to cargo connect circle
+    cargo_library.gyro_drive_until_r(600, 70, 1)
+    cargo_library.gyro_drive(200, 95, 70)
+    robot.turn(20)
+    cargo_library.gyro_drive(200, 30, 90)
+    cargo_library.gyro_drive_until_l(400, 90, 3)
+    #turn into cargo connect circle
+    robot.turn(90)
+    #release 1st cargo block
     front_attachment_motor.run_angle(500, 150, then=Stop.BRAKE)
+    #turn out of cargo connect circle
+    robot.turn(-95)
+    #drive to black circle by train tracks
+    cargo_library.gyro_drive(200, 200, 85)
+    # backup to black line by clostest to home bridge piece
+    cargo_library.bw_gyro_drive(600, 50, 85)
+    cargo_library.gyro_drive_until_l(-600, 100, 2)
+    robot.turn(90)
+    #drive back to wall by accident avoidence
+    cargo_library.bw_gyro_drive_until_t(600, 2000, 180)
+    #rest on bacl wall
+    cargo_library.reset(0)
+    cargo_library.gyro_drive(200, 5, 0)
+    #turn to face accident avoidence
+    robot.turn(90)
+    #drive past blue line and push yellow panel down
+    cargo_library.gyro_drive_until_r(100, 90, 1)
+
+
+    

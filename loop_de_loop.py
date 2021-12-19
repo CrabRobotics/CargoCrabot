@@ -67,5 +67,8 @@ def loop():
     #return to home
     robot.turn(45)
     #front_attachment_motor.run_angle(500, 150, then=Stop.BRAKE)
-    cargo_library.bw_gyro_drive(600, 600, 0)
+    cargo_library.bw_gyro_drive(600, 650, 0)
     front_attachment_motor.run_angle(500, 150, then=Stop.BRAKE)
+    wait(2000)
+    cargo_library.gyro_drive(600, 250, 0)
+    cargo_library.bw_gyro_drive(600, 250, 0)

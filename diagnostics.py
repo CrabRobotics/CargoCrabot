@@ -43,7 +43,7 @@ def diagnostics_test():
     #     ev3.screen.print("Current Problem")
     #     ev3.light.on(color.RED)
     g_angle = gyro.angle()
-    wait(1000)
+    wait(2500)
     new_g_angle = gyro.angle()
     new_g_angle = abs(new_g_angle)
     if new_g_angle > 1:
