@@ -24,8 +24,10 @@ gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 left_sensor = ColorSensor(Port.S3)
 right_sensor = ColorSensor(Port.S4)
 timer = StopWatch()
+robot.distance_control.limits(300, 200, 100)
+robot.heading_control.limits(100, 200, 100)
 
-def test():
+def carlgo():
     #backs up into wall
     cargo_library.reset_on_wall()
     cargo_library.reset(0)

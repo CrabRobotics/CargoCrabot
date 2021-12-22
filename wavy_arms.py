@@ -16,7 +16,7 @@ import cargo_library
 ev3 = EV3Brick()
 left_motor = Motor(Port.A)
 right_motor = Motor(Port.D)
-left_sensor = ColorSensor(Port.S1)
+left_sensor = ColorSensor(Port.S3)
 right_sensor = ColorSensor(Port.S4)
 robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=116)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
