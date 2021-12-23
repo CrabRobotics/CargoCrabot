@@ -54,46 +54,76 @@ def gyro_drive(speed, distance, angle):
     # print("Heading Settings =", robot.heading_control.limits())
 
 def gyro_drive_until_l(speed, angle, lines):
-    verify = 0
     kp = 5
     lines_passed = 1
     while lines_passed <= lines:
-        if left_sensor.color() == Color.BLACK:
+        if left_sensor.reflection() <= 8:
             while left_sensor.color() != Color.WHITE:
                 deviation = angle - gyro.angle()
                 turn_rate = kp * deviation
-                robot.drive(speed, turn_rate)
-        while left_sensor.color() != Color.BLACK and verify < 2:
-            if left_sensor.color() == Color.BLACK:
-                verify = verify + 1
+                robot.drive(speed, turn_rate)      
+        while left_sensor.reflection() > 8:
             deviation = angle - gyro.angle()
             turn_rate = kp * deviation
             robot.drive(speed, turn_rate)
         lines_passed = lines_passed + 1
-        #print ("Left color sensor = ",left_sensor.color())
     robot.straight(0)
     wait(200)
-    print("Angle =", gyro.angle(), "Should be", angle)
+    # verify = 0
+    # kp = 5
+    # lines_passed = 1
+    # while lines_passed <= lines:
+    #     if left_sensor.color() == Color.BLACK:
+    #         while left_sensor.color() != Color.WHITE:
+    #             deviation = angle - gyro.angle()
+    #             turn_rate = kp * deviation
+    #             robot.drive(speed, turn_rate)
+    #     while left_sensor.color() != Color.BLACK and verify < 2:
+    #         if left_sensor.color() == Color.BLACK:
+    #             verify = verify + 1
+    #         deviation = angle - gyro.angle()
+    #         turn_rate = kp * deviation
+    #         robot.drive(speed, turn_rate)
+    #     lines_passed = lines_passed + 1
+    #     #print ("Left color sensor = ",left_sensor.color())
+    # robot.straight(0)
+    # wait(200)
+    # print("Angle =", gyro.angle(), "Should be", angle)
 
 def gyro_drive_until_r(speed, angle, lines):
     kp = 5
     lines_passed = 1
     while lines_passed <= lines:
-        if right_sensor.color() == Color.BLACK:
+        if right_sensor.reflection() <= 8:
             while right_sensor.color() != Color.WHITE:
                 deviation = angle - gyro.angle()
                 turn_rate = kp * deviation
-                robot.drive(speed, turn_rate)
-        # Won't work if sensor is on black
-        while right_sensor.color() != Color.BLACK:
+                robot.drive(speed, turn_rate)      
+        while right_sensor.reflection() > 8:
             deviation = angle - gyro.angle()
             turn_rate = kp * deviation
             robot.drive(speed, turn_rate)
         lines_passed = lines_passed + 1
-        #print ("Right color sensor = ",right_sensor.color())
     robot.straight(0)
     wait(200)
-    print("Angle =", gyro.angle(), "Should be", angle)
+    # kp = 5
+    # lines_passed = 1
+    # while lines_passed <= lines:
+    #     if right_sensor.color() == Color.BLACK:
+    #         while right_sensor.color() != Color.WHITE:
+    #             deviation = angle - gyro.angle()
+    #             turn_rate = kp * deviation
+    #             robot.drive(speed, turn_rate)
+    #     # Won't work if sensor is on black
+    #     while right_sensor.color() != Color.BLACK:
+    #         deviation = angle - gyro.angle()
+    #         turn_rate = kp * deviation
+    #         robot.drive(speed, turn_rate)
+    #     lines_passed = lines_passed + 1
+    #     #print ("Right color sensor = ",right_sensor.color())
+    # robot.straight(0)
+    # wait(200)
+    # print("Angle =", gyro.angle(), "Should be", angle)
 
 def reset_on_wall():
     timer.reset()
