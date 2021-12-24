@@ -30,10 +30,6 @@ def reset(angle):
     robot.reset()
     gyro.reset_angle(angle)
 
-# def turn(angle):
-#     robot.turn(angle)
-
-
 def gyro_drive(speed, distance, angle):
     robot.reset()
     drive_distance = robot.distance()
@@ -45,50 +41,26 @@ def gyro_drive(speed, distance, angle):
         robot.drive(new_speed, turn_rate)
         drive_distance = robot.distance()
         wait(100)
-        #print("Gyro_Drive Angle =", gyro.angle())
-        #print("Speed =", new_speed)
     print("Angle =", gyro.angle(), "Should be", angle)
     robot.straight(0)
     wait(200)
-    # print("Distance Settings =", robot.distance_control.limits())
-    # print("Heading Settings =", robot.heading_control.limits())
 
 def gyro_drive_until_l(speed, angle, lines):
     kp = 5
     lines_passed = 1
     while lines_passed <= lines:
-        if left_sensor.reflection() <= 8:
+        if left_sensor.reflection() <= 10:
             while left_sensor.color() != Color.WHITE:
                 deviation = angle - gyro.angle()
                 turn_rate = kp * deviation
                 robot.drive(speed, turn_rate)      
-        while left_sensor.reflection() > 8:
+        while left_sensor.reflection() > 10:
             deviation = angle - gyro.angle()
             turn_rate = kp * deviation
             robot.drive(speed, turn_rate)
         lines_passed = lines_passed + 1
     robot.straight(0)
     wait(200)
-    # verify = 0
-    # kp = 5
-    # lines_passed = 1
-    # while lines_passed <= lines:
-    #     if left_sensor.color() == Color.BLACK:
-    #         while left_sensor.color() != Color.WHITE:
-    #             deviation = angle - gyro.angle()
-    #             turn_rate = kp * deviation
-    #             robot.drive(speed, turn_rate)
-    #     while left_sensor.color() != Color.BLACK and verify < 2:
-    #         if left_sensor.color() == Color.BLACK:
-    #             verify = verify + 1
-    #         deviation = angle - gyro.angle()
-    #         turn_rate = kp * deviation
-    #         robot.drive(speed, turn_rate)
-    #     lines_passed = lines_passed + 1
-    #     #print ("Left color sensor = ",left_sensor.color())
-    # robot.straight(0)
-    # wait(200)
-    # print("Angle =", gyro.angle(), "Should be", angle)
 
 def gyro_drive_until_r(speed, angle, lines):
     kp = 5
@@ -106,24 +78,6 @@ def gyro_drive_until_r(speed, angle, lines):
         lines_passed = lines_passed + 1
     robot.straight(0)
     wait(200)
-    # kp = 5
-    # lines_passed = 1
-    # while lines_passed <= lines:
-    #     if right_sensor.color() == Color.BLACK:
-    #         while right_sensor.color() != Color.WHITE:
-    #             deviation = angle - gyro.angle()
-    #             turn_rate = kp * deviation
-    #             robot.drive(speed, turn_rate)
-    #     # Won't work if sensor is on black
-    #     while right_sensor.color() != Color.BLACK:
-    #         deviation = angle - gyro.angle()
-    #         turn_rate = kp * deviation
-    #         robot.drive(speed, turn_rate)
-    #     lines_passed = lines_passed + 1
-    #     #print ("Right color sensor = ",right_sensor.color())
-    # robot.straight(0)
-    # wait(200)
-    # print("Angle =", gyro.angle(), "Should be", angle)
 
 def reset_on_wall():
     timer.reset()
@@ -143,15 +97,12 @@ def bw_gyro_drive(speed, distance, angle):
         robot.drive(new_speed, turn_rate)
         drive_distance = robot.distance()
         wait(100)
-        #print("Gyro_Drive Angle =", gyro.angle())
-        #print("Speed =", new_speed)
     print("Angle =", gyro.angle(), "Should be", angle)
     robot.straight(0)
     wait(200)
 
 def bw_gyro_drive_until_t(speed, time, angle):
     timer.reset()
-    #robot.reset()
     kp = 5
     new_speed = speed * -1
     while timer.time() < time:
@@ -159,8 +110,6 @@ def bw_gyro_drive_until_t(speed, time, angle):
         turn_rate = kp * deviation
         robot.drive(new_speed, turn_rate)
         wait(100)
-        #print("Gyro_Drive Angle =", gyro.angle())
-        #print("Speed =", new_speed)
     print("Angle =", gyro.angle(), "Should be", angle)
     robot.straight(0)
     wait(200)

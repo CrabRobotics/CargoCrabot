@@ -46,15 +46,9 @@ def wavy():
     robot.turn(90)
     cargo_library.gyro_drive(200, 330, 90)
     robot.straight(-100)
-#second half of bridge
     robot.turn(45)
-    cargo_library.gyro_drive_until_l(200, 135, 1)
-    # cargo_library.gyro_drive(200, 180, 135)
-    robot.turn(90)
 #Pulls down train track
-    robot.turn(-90)
-    cargo_library.gyro_drive(200, 50, 135)
-    cargo_library.gyro_drive_until_r(200,135, 1)
+    cargo_library.gyro_drive_until_r(200,135, 2)
     robot.turn(-30)
     cargo_library.gyro_drive_until_r(200, 105, 1)
     robot.straight(-100) 
@@ -71,7 +65,6 @@ def wavy():
 #pushes train out
     robot.straight(-75)
     robot.turn(90)
-    #cargo_library.gyro_drive(200, 70, 145)
     cargo_library.gyro_drive_until_l(100, 145, 2)
     robot.turn(35)
     cargo_library.gyro_drive_until_l(200, 180, 1)
@@ -83,9 +76,3 @@ def wavy():
     cargo_library.gyro_drive_until_r(200, 235, 1)
     robot.turn(45)
     cargo_library.gyro_drive(1000, 650, 280)
-
-    # cargo_library.gyro_drive(200, 135, 180)
-    # robot.turn(-90)
-    # cargo_library.gyro_drive(200, 200, 90)
-    # cargo_library.gyro_drive_until_l(600, 98, 1)
-    # robot.straight(-60)

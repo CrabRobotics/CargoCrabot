@@ -32,7 +32,6 @@ def carlgo():
     cargo_library.reset_on_wall()
     cargo_library.reset(0)
     #push front  attachment down
-    #front_attachment_motor.run_angle(-500, 150, then=Stop.BRAKE)
     front_attachment_motor.run_until_stalled(500, then=Stop.BRAKE, duty_limit=None)
     #drive to black line by airplane
     cargo_library.gyro_drive(200, 130, 0)
@@ -43,8 +42,7 @@ def carlgo():
     cargo_library.gyro_drive_until_r(600, 70, 1)
     cargo_library.gyro_drive(200, 95, 70)
     robot.turn(20)
-    cargo_library.gyro_drive(200, 200, 90)
-    cargo_library.gyro_drive_until_l(400, 90, 2)
+    cargo_library.gyro_drive_until_l(400, 90, 3)
     #turn into cargo connect circle
     robot.turn(90)
     #release 1st cargo block
@@ -59,7 +57,7 @@ def carlgo():
     robot.turn(90)
     #drive back to wall by accident avoidence
     cargo_library.bw_gyro_drive_until_t(600, 2000, 182)
-    #rest on bacl wall
+    #rest on back wall
     cargo_library.reset(0)
     cargo_library.gyro_drive(200, 5, 0)
     #turn to face accident avoidence

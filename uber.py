@@ -35,8 +35,6 @@ while True:
     ev3.screen.print("Gyro Angle: ",gyro_angle)
     ev3.screen.clear()
     b = EV3Brick.buttons.pressed()
-    # ev3.screen.print(ev3.battery.voltage())
-    # ev3.screen.print(gyro.angle())
     if Button.CENTER in b:
         loop_de_loop.loop() 
         print("center")  
@@ -47,11 +45,8 @@ while True:
         carlgo.carlgo()
         print("down")
     if Button.RIGHT in b:
-        run_test.test()
+        run_test.test() 
         print("right")   
     if Button.LEFT in b:
         run_test.test() 
         print("left") 
-    # if Button.LEFT and Button.RIGHT in b:
-    #     diagnostics.diagnostics_test()
-    #     print(diagnostics)
