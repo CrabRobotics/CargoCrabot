@@ -43,7 +43,7 @@ def loop():
     #unload cargo plane
     front_attachment_motor.run_until_stalled(-500, then=Stop.BRAKE, duty_limit=None)
     #backup for golf shot
-    front_attachment_motor.run_angle(500, 150, then=Stop.BRAKE)
+    front_attachment_motor.run_angle(500, 150, then=Stop.BRAKE)#may want to run until stall
     cargo_library.bw_gyro_drive(600, 15, -45)
     front_attachment_motor.run_until_stalled(-500, then=Stop.BRAKE, duty_limit=None)
     wait(100)

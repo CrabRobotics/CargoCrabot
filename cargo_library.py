@@ -66,12 +66,12 @@ def gyro_drive_until_r(speed, angle, lines):
     kp = 5
     lines_passed = 1
     while lines_passed <= lines:
-        if right_sensor.reflection() <= 8:
+        if right_sensor.reflection() <= 6:
             while right_sensor.color() != Color.WHITE:
                 deviation = angle - gyro.angle()
                 turn_rate = kp * deviation
                 robot.drive(speed, turn_rate)      
-        while right_sensor.reflection() > 8:
+        while right_sensor.reflection() > 6:
             deviation = angle - gyro.angle()
             turn_rate = kp * deviation
             robot.drive(speed, turn_rate)

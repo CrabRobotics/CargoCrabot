@@ -63,4 +63,4 @@ def carlgo():
     #turn to face accident avoidence
     robot.turn(90)
     #drive past blue line and push yellow panel down
-    cargo_library.gyro_drive_until_r(50, 90, 1)
+    cargo_library.gyro_drive_until_r(50, 90, 1)#may want to speed up
