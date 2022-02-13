@@ -23,6 +23,10 @@ robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=116)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 timer = StopWatch()
 
+def test_light_sensor_calibration():
+    print("Left Sensor: " + Left_Sensor_Calibration)
+    print("Right Sensor: " + Right_Sensor_Calibration)
+
 def beep():
     ev3.speaker.beep()
 

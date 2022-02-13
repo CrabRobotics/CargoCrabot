@@ -30,6 +30,27 @@ def diagnostics_test():
     ev3.speaker.say("Starting")
     ev3.light.on(Color.YELLOW)
     cargo_library.reset(0)
+    b = EV3Brick.buttons.pressed()
+    while True:
+        ev3.screen.print("Please move both Color Sensors above a Black Line. Press center button when ready.")
+        if Button.CENTER in b:
+            LB = left_sensor.reflection()
+            RB = right_sensor.reflection()
+            break
+    while True:
+        ev3.screen.print("Please move the Left Color Sensor above a Dark Blue spot. Press center button when ready.")
+        if Button.CENTER in b:
+            LDB = left_sensor.reflection()
+            break
+    while True:
+        ev3.screen.print("Please move the Right Color Sensor above a Dark Blue spot. Press center button when ready.")
+        if Button.CENTER in b:
+            RDB = right_sensor.reflection()
+            break
+    global Left_Sensor_Calibration
+    Left_Sensor_Calibration = (LB+LDB)/2
+    global Right_Sensor_Calibration
+    Right_Sensor_Calibration = (RB+RDB)/2
     volt = ev3.battery.voltage()
     if volt < 8000:
         ev3.speaker.beep(1000, 1000)

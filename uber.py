@@ -45,8 +45,8 @@ while True:
         carlgo.carlgo()
         print("down")
     if Button.RIGHT in b:
-        run_test.test() 
+        run_test_2.test() 
         print("right")   
     if Button.LEFT in b:
-        run_test.test() 
+        run_test_1.test() 
         print("left") 
