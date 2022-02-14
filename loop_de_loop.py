@@ -51,7 +51,8 @@ def loop():
     front_attachment_motor.run_angle(500, 150, then=Stop.BRAKE)
     cargo_library.gyro_drive(600, 5, -45)
     robot.turn(60)
-    front_attachment_motor.run_angle(-500, 150, then=Stop.BRAKE)
+    #front_attachment_motor.run_angle(-500, 150, then=Stop.BRAKE)
+    front_attachment_motor.run_until_stalled(-500, then=Stop.BRAKE, duty_limit=None)
     #swing golf club
     robot.turn(-60)
     #return to home

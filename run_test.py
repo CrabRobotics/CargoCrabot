@@ -24,29 +24,16 @@ gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 left_sensor = ColorSensor(Port.S3)
 right_sensor = ColorSensor(Port.S4)
 timer = StopWatch()
+robot.distance_control.limits(300, 200, 100)
+robot.heading_control.limits(100, 200, 100)
 
-def test():
-    b = EV3Brick.buttons.pressed()
-    cargo_library.reset(0)
-    gyro.reset_angle(0)
-    speed = 500
-    distance = 600
-    angle = 0
-    robot.reset()
-    drive_distance = robot.distance()
-    kp = 5
-    new_speed = speed
-    while drive_distance < distance:
-        deviation = angle - gyro.angle()
-        turn_rate = kp * deviation
-        robot.drive(new_speed, turn_rate)
-        drive_distance = robot.distance()
-        wait(100)
-        #print("Gyro_Drive Angle =", gyro.angle())
-        #print("Speed =", new_speed)
-        if speed == speed:
-            print('Broken')
-            break
-    print("Angle =", gyro.angle(), "Should be", angle)
-    robot.straight(0)
+def test1():
+    front_attachment_motor.run_until_stalled(150, then=Stop.BRAKE, duty_limit=None)
+    #front_attachment_motor.run_angle(150, 60, then=Stop.BRAKE)
+    front_attachment_motor.run_angle(-150, 160, then=Stop.BRAKE)
+    #front_attachment_motor.run_until_stalled(-250, then=Stop.BRAKE, duty_limit=None)
+    wait(1000)
+    front_attachment_motor.run_angle(150, 160, then=Stop.BRAKE)
+    front_attachment_motor.run_angle(-150, 125, then=Stop.BRAKE)
     wait(200)
+    front_attachment_motor.run_angle(150, 125, then=Stop.BRAKE)

@@ -12,6 +12,7 @@ import loop_de_loop
 import wavy_arms
 import diagnostics
 import carlgo
+import run_test_2
 
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
 # Click "Open user guide" on the EV3 extension tab for more information.
@@ -19,10 +20,17 @@ import carlgo
 
 # Create your objects here.
 ev3 = EV3Brick()
+left_motor = Motor(Port.A)
+right_motor = Motor(Port.D)
+left_sensor = ColorSensor(Port.S3)
+right_sensor = ColorSensor(Port.S4)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=116)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
+robot.distance_control.limits(300, 200, 100)
+robot.heading_control.limits(100, 200, 100)
+timer = StopWatch()
 
 # Write your program here.
-
 diagnostics.diagnostics_test()
 battery = ev3.battery.voltage()
 gyro_angle = gyro.angle()
@@ -48,5 +56,5 @@ while True:
         run_test_2.test() 
         print("right")   
     if Button.LEFT in b:
-        run_test_1.test() 
+        run_test.test1() 
         print("left") 

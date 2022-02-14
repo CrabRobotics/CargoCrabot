@@ -7,6 +7,7 @@ from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
 import cargo_library
+import diagnostics
 
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
 # Click "Open user guide" on the EV3 extension tab for more information.
@@ -21,11 +22,11 @@ left_sensor = ColorSensor(Port.S3)
 right_sensor = ColorSensor(Port.S4)
 robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=116)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
+robot.distance_control.limits(300, 200, 100)
+robot.heading_control.limits(100, 200, 100)
 timer = StopWatch()
 
-def test_light_sensor_calibration():
-    print("Left Sensor: " + Left_Sensor_Calibration)
-    print("Right Sensor: " + Right_Sensor_Calibration)
+
 
 def beep():
     ev3.speaker.beep()
@@ -53,12 +54,12 @@ def gyro_drive_until_l(speed, angle, lines):
     kp = 5
     lines_passed = 1
     while lines_passed <= lines:
-        if left_sensor.reflection() <= 10:
+        if left_sensor.reflection() <= diagnostics.Left_Sensor_Calibration:
             while left_sensor.color() != Color.WHITE:
                 deviation = angle - gyro.angle()
                 turn_rate = kp * deviation
                 robot.drive(speed, turn_rate)      
-        while left_sensor.reflection() > 10:
+        while left_sensor.reflection() > diagnostics.Left_Sensor_Calibration:
             deviation = angle - gyro.angle()
             turn_rate = kp * deviation
             robot.drive(speed, turn_rate)
@@ -70,12 +71,12 @@ def gyro_drive_until_r(speed, angle, lines):
     kp = 5
     lines_passed = 1
     while lines_passed <= lines:
-        if right_sensor.reflection() <= 6:
+        if right_sensor.reflection() <= diagnostics.Right_Sensor_Calibration:
             while right_sensor.color() != Color.WHITE:
                 deviation = angle - gyro.angle()
                 turn_rate = kp * deviation
                 robot.drive(speed, turn_rate)      
-        while right_sensor.reflection() > 6:
+        while right_sensor.reflection() > diagnostics.Right_Sensor_Calibration:
             deviation = angle - gyro.angle()
             turn_rate = kp * deviation
             robot.drive(speed, turn_rate)

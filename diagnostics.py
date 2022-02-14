@@ -5,7 +5,7 @@ from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
 from pybricks.parameters import Port, Stop, Direction, Button, Color
 from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.robotics import DriveBase
-from pybricks.media.ev3dev import SoundFile, ImageFile
+from pybricks.media.ev3dev import SoundFile, ImageFile, Font
 import cargo_library
 
 
@@ -25,32 +25,43 @@ gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 robot.distance_control.limits(300, 200, 100)
 robot.heading_control.limits(100, 200, 100)
 timer = StopWatch()
+small_font = Font(size=18)
+ev3.screen.set_font(small_font)
 
 def diagnostics_test():
     ev3.speaker.say("Starting")
     ev3.light.on(Color.YELLOW)
     cargo_library.reset(0)
-    b = EV3Brick.buttons.pressed()
+    ev3.screen.clear()
+    ev3.screen.print("Please move both\nColor Sensors above\na Black Line.\nPress center button\nwhen ready.")
     while True:
-        ev3.screen.print("Please move both Color Sensors above a Black Line. Press center button when ready.")
+        b = EV3Brick.buttons.pressed()
         if Button.CENTER in b:
             LB = left_sensor.reflection()
             RB = right_sensor.reflection()
+            ev3.screen.clear()
+            wait(1000)
             break
+    ev3.screen.print("Please move Left\nColor Sensor above\na Dark Blue spot.\nPress left button\nwhen ready.")   
     while True:
-        ev3.screen.print("Please move the Left Color Sensor above a Dark Blue spot. Press center button when ready.")
-        if Button.CENTER in b:
+        b = EV3Brick.buttons.pressed()
+        if Button.LEFT in b:
             LDB = left_sensor.reflection()
+            ev3.screen.clear()
+            wait(1000)
             break
+    ev3.screen.print("Please move Right\nColor Sensor above\na Dark Blue spot.\nPress right button\nwhen ready.")
     while True:
-        ev3.screen.print("Please move the Right Color Sensor above a Dark Blue spot. Press center button when ready.")
-        if Button.CENTER in b:
+        b = EV3Brick.buttons.pressed()
+        if Button.RIGHT in b:
             RDB = right_sensor.reflection()
+            ev3.screen.clear()
+            wait(1000)
             break
     global Left_Sensor_Calibration
-    Left_Sensor_Calibration = (LB+LDB)/2
+    Left_Sensor_Calibration = int((LB+LDB)/2)
     global Right_Sensor_Calibration
-    Right_Sensor_Calibration = (RB+RDB)/2
+    Right_Sensor_Calibration = int((RB+RDB)/2)
     volt = ev3.battery.voltage()
     if volt < 8000:
         ev3.speaker.beep(1000, 1000)
