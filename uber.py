@@ -34,14 +34,19 @@ timer = StopWatch()
 diagnostics.diagnostics_test()
 battery = ev3.battery.voltage()
 gyro_angle = gyro.angle()
+screen_print = 0
 while True:
     voltage = ev3.battery.voltage()
     current = ev3.battery.current()
     gyro_angle = gyro.angle()
-    ev3.screen.print("Voltage: ",voltage)
-    ev3.screen.print("Current: ",current)
-    ev3.screen.print("Gyro Angle: ",gyro_angle)
-    ev3.screen.clear()
+    if screen_print == 0:
+        ev3.screen.clear()
+        ev3.screen.print("Voltage: ",voltage)
+        ev3.screen.print("Current: ",current)
+        ev3.screen.print("Gyro Angle: ",gyro_angle)
+    screen_print += 1
+    if screen_print == 50:
+        screen_print = 0
     b = EV3Brick.buttons.pressed()
     if Button.CENTER in b:
         loop_de_loop.loop() 

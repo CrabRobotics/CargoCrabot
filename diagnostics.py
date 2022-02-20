@@ -29,59 +29,75 @@ small_font = Font(size=18)
 ev3.screen.set_font(small_font)
 
 def diagnostics_test():
-    ev3.speaker.say("Starting")
-    ev3.light.on(Color.YELLOW)
-    cargo_library.reset(0)
-    ev3.screen.clear()
-    ev3.screen.print("Please move both\nColor Sensors above\na Black Line.\nPress center button\nwhen ready.")
-    while True:
-        b = EV3Brick.buttons.pressed()
-        if Button.CENTER in b:
-            LB = left_sensor.reflection()
-            RB = right_sensor.reflection()
-            ev3.screen.clear()
-            wait(1000)
-            break
-    ev3.screen.print("Please move Left\nColor Sensor above\na Dark Blue spot.\nPress left button\nwhen ready.")   
+    ev3.screen.print("Press Left button\nto run diagnostics\nor Press Right\nbutton to skip")
     while True:
         b = EV3Brick.buttons.pressed()
         if Button.LEFT in b:
-            LDB = left_sensor.reflection()
+            ev3.speaker.say("Starting")
+            ev3.light.on(Color.YELLOW)
+            cargo_library.reset(0)
             ev3.screen.clear()
-            wait(1000)
-            break
-    ev3.screen.print("Please move Right\nColor Sensor above\na Dark Blue spot.\nPress right button\nwhen ready.")
-    while True:
-        b = EV3Brick.buttons.pressed()
+            ev3.screen.print("Please move both\nColor Sensors above\na Black Line.\nPress center button\nwhen ready.")
+            while True:
+                b = EV3Brick.buttons.pressed()
+                if Button.CENTER in b:
+                    LB = left_sensor.reflection()
+                    RB = right_sensor.reflection()
+                    ev3.screen.clear()
+                    wait(1000)
+                    break
+            ev3.screen.print("Please move Left\nColor Sensor above\na Dark Blue spot.\nPress left button\nwhen ready.")   
+            while True:
+                b = EV3Brick.buttons.pressed()
+                if Button.LEFT in b:
+                    LDB = left_sensor.reflection()
+                    ev3.screen.clear()
+                    wait(1000)
+                    break
+            ev3.screen.print("Please move Right\nColor Sensor above\na Dark Blue spot.\nPress right button\nwhen ready.")
+            while True:
+                b = EV3Brick.buttons.pressed()
+                if Button.RIGHT in b:
+                    RDB = right_sensor.reflection()
+                    ev3.screen.clear()
+                    wait(1000)
+                    break
+            global Left_Sensor_Calibration
+            Left_Sensor_Calibration = int((LB+LDB)/2)
+            global Right_Sensor_Calibration
+            Right_Sensor_Calibration = int((RB+RDB)/2)
+            volt = ev3.battery.voltage()
+            if volt < 8000:
+                ev3.speaker.beep(1000, 1000)
+                ev3.speaker.say("Voltage")
+                ev3.screen.print("Voltage Problem")
+                ev3.light.on(Color.RED)
+            # current = ev3.battery.current()
+            # if current < 1.80
+            #     ev3.speaker.beep(1000, 1000)
+            #     ev3.speaker.say("Current")
+            #     ev3.screen.print("Current Problem")
+            #     ev3.light.on(color.RED)\
+            cargo_library.reset(0)
+            g_angle = gyro.angle() #Possibly not needed
+            # print(gyro.angle())
+            wait(2500)
+            new_g_angle = gyro.angle()
+            # print(new_g_angle)
+            # new_g_angle = abs(new_g_angle)
+            # print(new_g_angle)
+            if abs(g_angle-new_g_angle) > 1:
+                ev3.speaker.beep(1000, 1000)
+                ev3.speaker.say("gyro")
+                ev3.screen.print("Gyro Problem")
+                ev3.light.on(Color.RED)
+            ev3.speaker.say("Finished")
+            ev3.light.on(Color.GREEN)
         if Button.RIGHT in b:
-            RDB = right_sensor.reflection()
-            ev3.screen.clear()
+            global Left_Sensor_Calibration
+            Left_Sensor_Calibration = 11
+            global Right_Sensor_Calibration
+            Right_Sensor_Calibration = 9
             wait(1000)
             break
-    global Left_Sensor_Calibration
-    Left_Sensor_Calibration = int((LB+LDB)/2)
-    global Right_Sensor_Calibration
-    Right_Sensor_Calibration = int((RB+RDB)/2)
-    volt = ev3.battery.voltage()
-    if volt < 8000:
-        ev3.speaker.beep(1000, 1000)
-        ev3.speaker.say("Voltage")
-        ev3.screen.print("Voltage Problem")
-        ev3.light.on(Color.RED)
-    # current = ev3.battery.current()
-    # if current < 1.80
-    #     ev3.speaker.beep(1000, 1000)
-    #     ev3.speaker.say("Current")
-    #     ev3.screen.print("Current Problem")
-    #     ev3.light.on(color.RED)
-    g_angle = gyro.angle()
-    wait(2500)
-    new_g_angle = gyro.angle()
-    new_g_angle = abs(new_g_angle)
-    if new_g_angle > 1:
-        ev3.speaker.beep(1000, 1000)
-        ev3.speaker.say("gyro")
-        ev3.screen.print("Gyro Problem")
-        ev3.light.on(Color.RED)
-    ev3.speaker.say("Finished")
-    ev3.light.on(Color.GREEN)
+    

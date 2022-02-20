@@ -1,11 +1,3 @@
-# CargoCrabot
-Add some text below with your name in it, and commit it to the repository.
-This is a test update - Allen Durda
-This is a second test update - Chris Whited
-Kate Test
-Caleb Durda
-Adam Mulac
-Carlton Schantz
-Franklin Schantz
-Zac Keepers
-Adam Mulac Desktop
+We are Team C.R.A.B. - Cool Robots And Builders. We participate in FIRST LEGO League. We have 6 cast members that work on building and programming a LEGO EV3 Robot in python. You can follow us at https://www.facebook.com/CRABRobotics.
+
+Our main program is called Uber, and in Uber, we have a loop that continually runs our diagnostics program.  The diagnostics program is checking for gyro drift, low voltage, and current. It also callibrates the color sensor. Uber is also waiting for a button push, and once pushed, it will start one of our sub programs. Within these sub programs, we are using functions from the ev3 libraries as well as our CRAB library that we created.

@@ -18,6 +18,7 @@ left_motor = Motor(Port.A)
 right_motor = Motor(Port.D)
 left_sensor = ColorSensor(Port.S3)
 right_sensor = ColorSensor(Port.S4)
+front_attachment_motor = Motor(Port.B)
 robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=116)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 robot.distance_control.limits(300, 200, 100)
@@ -29,6 +30,7 @@ def wavy():
 #sets robot up for run
     cargo_library.reset_on_wall()
     cargo_library.reset(0)
+    front_attachment_motor.run_until_stalled(150, then=Stop.BRAKE, duty_limit=None)
 #pushes truck to bridge
     cargo_library.gyro_drive(200, 130, 0)
     robot.turn(45)
@@ -65,9 +67,16 @@ def wavy():
 #pushes train out
     robot.straight(-75)
     robot.turn(90)
-    cargo_library.gyro_drive_until_l(100, 145, 2)
+    if left_sensor.color() == Color.BLACK:
+        cargo_library.gyro_drive_until_l(100, 145, 1)
+    else:
+        cargo_library.gyro_drive_until_l(100, 145, 2)
     robot.turn(35)
     cargo_library.gyro_drive_until_l(200, 180, 1)
+    robot.turn(-20)
+    front_attachment_motor.run_angle(-75, 45, then=Stop.BRAKE)
+    front_attachment_motor.run_angle(150, 45, then=Stop.BRAKE)
+    front_attachment_motor.run_until_stalled(150, then=Stop.BRAKE, duty_limit=None) 
 #go back home
     cargo_library.bw_gyro_drive(600, 200, 180)
     robot.turn(90)
