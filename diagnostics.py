@@ -94,6 +94,7 @@ def diagnostics_test():
             ev3.speaker.say("Finished")
             ev3.light.on(Color.GREEN)
         if Button.RIGHT in b:
+            ev3.screen.clear()
             global Left_Sensor_Calibration
             Left_Sensor_Calibration = 11
             global Right_Sensor_Calibration
