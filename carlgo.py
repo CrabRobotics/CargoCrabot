@@ -24,7 +24,7 @@ gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 left_sensor = ColorSensor(Port.S3)
 right_sensor = ColorSensor(Port.S4)
 timer = StopWatch()
-robot.distance_control.limits(300, 200, 100)
+robot.distance_control.limits(600, 400, 100)
 robot.heading_control.limits(100, 200, 100)
 
 def carlgo():
@@ -54,13 +54,14 @@ def carlgo():
     # backup to black line by clostest to home bridge piece
     cargo_library.bw_gyro_drive(600, 50, 85)
     cargo_library.gyro_drive_until_l(-600, 100, 2)
+    cargo_library.gyro_drive_until_l(300, 100, 1)
     robot.turn(90)
     #drive back to wall by accident avoidence
-    cargo_library.bw_gyro_drive_until_t(600, 2000, 182)
+    cargo_library.bw_gyro_drive_until_t(600, 1500, 182)
     #rest on back wall
     cargo_library.reset(0)
-    cargo_library.gyro_drive(200, 5, 0)
+    #cargo_library.gyro_drive(200, 5, 0)
     #turn to face accident avoidence
-    robot.turn(90)
+    robot.turn(115)
     #drive past blue line and push yellow panel down
     cargo_library.gyro_drive_until_r(50, 90, 1)#may want to speed up

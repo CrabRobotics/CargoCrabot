@@ -26,7 +26,7 @@ left_sensor = ColorSensor(Port.S3)
 right_sensor = ColorSensor(Port.S4)
 robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=116)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
-robot.distance_control.limits(300, 200, 100)
+robot.distance_control.limits(600, 400, 100)
 robot.heading_control.limits(100, 200, 100)
 timer = StopWatch()
 
