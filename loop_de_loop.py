@@ -16,6 +16,7 @@ import cargo_library
 ev3 = EV3Brick()
 left_motor = Motor(Port.A)
 right_motor = Motor(Port.D)
+back_attachment_motor = Motor(Port.C)
 front_attachment_motor = Motor(Port.B)
 left_sensor = ColorSensor(Port.S3)
 right_sensor = ColorSensor(Port.S4)

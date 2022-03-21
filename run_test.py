@@ -19,6 +19,7 @@ ev3 = EV3Brick()
 left_motor = Motor(Port.A)
 right_motor = Motor(Port.D)
 front_attachment_motor = Motor(Port.B)
+back_attachment_motor = Motor(Port.C)
 robot = DriveBase(left_motor, right_motor, wheel_diameter=79, axle_track=116)
 gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
 left_sensor = ColorSensor(Port.S3)
@@ -28,6 +29,6 @@ robot.distance_control.limits(600, 400, 100)
 robot.heading_control.limits(100, 200, 100)
 
 def test1():
+    back_attachment_motor.run_until_stalled(-75, then=Stop.BRAKE, duty_limit=None)
+    back_attachment_motor.run_angle(75, 145, then=Stop.BRAKE)
     
-    front_attachment_motor.run_angle(-75, 45, then=Stop.BRAKE)
-    front_attachment_motor.run_angle(150, 75, then=Stop.BRAKE)
