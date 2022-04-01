@@ -31,10 +31,10 @@ def loop():
     cargo_library.reset(0)
     #drive to 2 black line
     cargo_library.gyro_drive_until_r(300, 0, 2)
-    robot.turn(52)
+    robot.turn(58)
     front_attachment_motor.reset_angle(0)
     #get in front of engine
-    cargo_library.gyro_drive(200, 120, 55)
+    cargo_library.gyro_drive(200, 100, 55)
     #flip engine
     front_attachment_motor.run_angle(200, 130, then=Stop.BRAKE)
     #get to cargo plane

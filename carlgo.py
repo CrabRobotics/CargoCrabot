@@ -52,7 +52,7 @@ def carlgo():
         cargo_library.gyro_drive_until_l(-200, 90, 1)
         robot.turn(100)
     #release 1st cargo block
-    front_attachment_motor.run_angle(-500, 150, then=Stop.BRAKE)
+    front_attachment_motor.run_until_stalled(-500, then=Stop.BRAKE)
     #turn out of cargo connect circle
     robot.turn(-105)
     #drive to black circle by train tracks
@@ -66,10 +66,15 @@ def carlgo():
     cargo_library.bw_gyro_drive_until_t(300, 1500, 182)
     #rest on back wall
     cargo_library.reset(0)
-    cargo_library.gyro_drive(50, 1, 0)
+    cargo_library.gyro_drive(50, 3, 0)
     #turn to face accident avoidence
     robot.turn(90)
-    cargo_library.bw_gyro_drive(50, 20, 90)
-    back_attachment_motor.run_angle(75, 145, then=Stop.BRAKE)
+    cargo_library.reset_on_wall()
+    #bw_gyro_drive(50, 35, 90)
+    #back_attachment_motor.run_until_stalled(100, then=Stop.COAST, duty_limit=None)
+    #cargo_library.gyro_drive(50, 30, 90)
+    back_attachment_motor.run_angle(75, 145, then=Stop.COAST)
     #drive past blue line and push yellow panel down
+    #robot.straight(70)
     cargo_library.gyro_drive_until_r(50, 90, 1)#may want to speed up
+    

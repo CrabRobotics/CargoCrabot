@@ -85,7 +85,7 @@ def wavy():
     front_attachment_motor.run_angle(150, 45, then=Stop.BRAKE)
     front_attachment_motor.run_until_stalled(150, then=Stop.BRAKE, duty_limit=None) 
     robot.turn(90)
-    cargo_library.gyro_drive(1000, 860, 270)
+    cargo_library.gyro_drive(300, 1050, 270)
     robot.turn(-35)
     cargo_library.gyro_drive_until_r(200, 235, 1)
     robot.turn(45)
