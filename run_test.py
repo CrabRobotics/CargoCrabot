@@ -29,6 +29,4 @@ robot.distance_control.limits(600, 400, 100)
 robot.heading_control.limits(100, 200, 100)
 
 def test1():
-    back_attachment_motor.run_until_stalled(-75, then=Stop.BRAKE, duty_limit=None)
-    back_attachment_motor.run_angle(75, 145, then=Stop.BRAKE)
-    
+    front_attachment_motor.run_until_stalled(150, then=Stop.BRAKE, duty_limit=None)
