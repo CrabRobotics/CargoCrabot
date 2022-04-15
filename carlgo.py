@@ -52,7 +52,8 @@ def carlgo():
         cargo_library.gyro_drive_until_l(-200, 90, 1)
         robot.turn(100)
     #release 1st cargo block
-    front_attachment_motor.run_until_stalled(-500, then=Stop.BRAKE)
+    front_attachment_motor.run_angle(-300, 145, then=Stop.COAST)
+    #front_attachment_motor.run_until_stalled(-500, then=Stop.BRAKE)
     #turn out of cargo connect circle
     robot.turn(-105)
     #drive to black circle by train tracks
